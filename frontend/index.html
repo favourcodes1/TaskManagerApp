@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+</head>
+<body>
+    <h1>Task Manager</h1>
+    <div id="tasks"></div>
+    <script>
+        fetch('http://localhost:5000/tasks')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('tasks').innerHTML = data.map(task => `<p>${task.title}</p>`).join('');
+            });
+    </script>
+</body>
+</html>
