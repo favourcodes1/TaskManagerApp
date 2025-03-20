@@ -1,24 +1,7 @@
 # Task Manager App
 
-## Overview
-A simple task management application built with Node.js, Express.js, and MongoDB.
+A full-stack Task Manager built with Node.js, Express, MongoDB, and vanilla JavaScript.
 
-## Features
-- Add, view, and manage tasks
-- REST API implementation
-- Basic frontend
-
-## Installation
-
-### Backend Setup
-```sh
-cd backend
-npm install
-node server.js
-```
-
-### Frontend Setup
-Simply open `frontend/index.html` in a browser.
-
-## License
-MIT License
+## Setup
+1. Install dependencies: `npm install`
+2. Create a `.env` file with:

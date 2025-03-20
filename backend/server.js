@@ -1,27 +1,20 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');
+const taskRoutes = require('./routes/taskRoutes');
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+
+dotenv.config();
+connectDB();
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/taskmanager', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err));
-
-const TaskSchema = new mongoose.Schema({ title: String, completed: Boolean });
-const Task = mongoose.model('Task', TaskSchema);
-
-app.get('/tasks', async (req, res) => {
-    const tasks = await Task.find();
-    res.json(tasks);
-});
-
-app.post('/tasks', async (req, res) => {
-    const task = new Task(req.body);
-    await task.save();
-    res.json(task);
-});
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/user', userRoutes);
 
 app.listen(5000, () => console.log('Server running on port 5000'));
